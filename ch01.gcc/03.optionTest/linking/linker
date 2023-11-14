@@ -1,0 +1,97 @@
+ #!/bin/bash
+ 
+ if [ $# -lt 1 ]; then
+	echo "Usage : $(basename $0) <file.o> [.o ...]"
+	exit 1
+fi
+ 
+ld --build-id --dynamic-linker /lib64/ld-linux-x86-64.so.2 \
+ /usr/lib/x86_64-linux-gnu/Scrt1.o \
+ /usr/lib/x86_64-linux-gnu/crti.o \
+ /usr/lib/x86_64-linux-gnu/crtn.o \
+ /usr/lib/gcc/x86_64-linux-gnu/11/crtend.o \
+ /usr/lib/gcc/x86_64-linux-gnu/11/crtbegin.o \
+ -lc \
+$@ 
+
+
+: << COMMENT
+/*
+	PIC - position independent code (-fPIC)
+	PIE - position independent executable (-fPIE -pie)
+	crt - C runtime
+*/
+
+/*
+Scrt1.o
+	Specifically, Scrt1.o contains the implementation of the "_start" symbol, 
+	which is the entry point for the C runtime initialization process.
+	The linker uses the code and symbols from Scrt1.o to create the initialization code 
+	that runs before the "main" function is called.
+
+	In other words, Scrt1.o plays a crucial role in the linking process by providing 
+	the implementation of the C runtime startup routines, which are necessary for 
+	setting up the runtime environment before the main function is executed.
+	
+crti.o
+	Specifically, crti.o contains code that is executed before the C runtime 
+	initialization routines in crt1.o. 
+	This initialization code sets up the environment for C code to run correctly, 
+	such as setting up the stack and initializing the static constructors. 
+	It also initializes certain registers that need to be set up 
+	before the C runtime initialization routines can be executed.
+	
+crtn.o
+	Specifically, crtn.o contains the implementation of the "_fini" symbol, 
+	which is the entry point for the C runtime termination process. 
+	This symbol points to the termination code that cleans up the runtime environment, 
+	such as freeing dynamically allocated memory and closing open files
+	
+
+*/
+
+/*
+crtbegin.o (crtbeginS.o)
+	crtbegin.o is similar to crtbeginS.o but is used for linking dynamic shared objects 
+	(DSOs) instead of executables. 
+	When a dynamic shared object is loaded, the initialization code in crtbegin.o is 
+	executed before the DSO's init function is called.
+
+	The crtbegin.o file contains the code that sets up the DSO's runtime environment, 
+	just like crtbeginS.o does for executables. 
+	This includes initializing global variables and registering any static constructors 
+	that need to be called before the DSO's init function is executed.
+
+	crtbeginS.o contains code that is executed before main() is called in the program.
+	
+	During the linking process, crtbeginS.o is typically included as one of the input 
+	files to the linker. When the linker combines all of the object files into 
+	an executable program, it will include the initialization code from crtbeginS.o 
+	at the beginning of the executable.
+
+	The initialization code in crtbeginS.o is responsible for performing various tasks, 
+	such as setting up the stack, initializing global variables, 	and registering 
+	any static constructors that need to be called before main() is executed. 
+	This ensures that the program's runtime environment is properly set up 
+	before any user-defined code is executed.
+	
+crtend.o (crtendS.o)
+	crtend.o contains code that marks the end of the initialized 
+	data section and the beginning of the uninitialized data section. 
+	This is important because it allows the operating system to allocate memory 
+	for the uninitialized data section at runtime, and initialize it to zero.
+	
+	crtendS.o contains code that is executed after main() returns.
+	During the linking process, crtendS.o is typically included as one of the input 
+	files to the linker, along with other object files and libraries. 
+	When the linker combines all of the object files into an executable program, 
+	it will include the cleanup code from crtendS.o at the end of the executable.
+
+	The cleanup code in crtendS.o is responsible for performing various tasks, 
+	such as calling any static destructors that need to be executed after main() returns, 
+	and deallocating any resources that were allocated during the program's execution.
+
+*/
+
+/* http://www.vishalchovatiya.com/crt-run-time-before-starting-main/	*/
+COMMENT

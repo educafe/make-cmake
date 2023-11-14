@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.22)
+project(educafe08-libs LANGUAGES C)
+include_directories(${CMAKE_SOURCE_DIR}/headers)
+set(SRCS ${CMAKE_CURRENT_LIST_DIR}/func1.c ${CMAKE_SOURCE_DIR}/libs/func2.c)
+add_library(funcs SHARED ${SRCS})

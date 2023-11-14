@@ -1,0 +1,10 @@
+## ch04_cmake/05-1.variables-list/CMakeLists.txt
+cmake_minimum_required(VERSION 3.22)
+project("educafe-05-1" LANGUAGES C)
+list(APPEND SRCS main.c)
+message("SRCS : ${SRCS}")
+list(APPEND SRCS func1.c)
+message("SRCS : ${SRCS}")
+list(APPEND SRCS func2.c)
+message("SRCS : ${SRCS}")
+add_executable(a.out ${SRCS})

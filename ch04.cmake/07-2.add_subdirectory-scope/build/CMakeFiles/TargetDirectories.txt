@@ -1,0 +1,4 @@
+/home/educafe/ch04.cmake_adv/07-2.add_subdirectory-scope/build/CMakeFiles/edit_cache.dir
+/home/educafe/ch04.cmake_adv/07-2.add_subdirectory-scope/build/CMakeFiles/rebuild_cache.dir
+/home/educafe/ch04.cmake_adv/07-2.add_subdirectory-scope/build/mysub/CMakeFiles/edit_cache.dir
+/home/educafe/ch04.cmake_adv/07-2.add_subdirectory-scope/build/mysub/CMakeFiles/rebuild_cache.dir

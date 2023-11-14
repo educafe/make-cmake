@@ -1,0 +1,13 @@
+## ch04_cmake/06-2.option/CMakeLists.txt
+cmake_minimum_required(VERSION 3.22)
+project("educafe-06-2" LANGUAGES C)
+set(SRCS main.c)
+set(LIBS func1.c func2.c)
+message(LIBS= "${LIBS}")
+message(STATUS SRCS= "${SRCS}")
+set(LIB_TYPE SHARED CACHE STRING "To set type of library")
+if(${LIB_TYPE} STREQUAL SHARED)
+	add_library(funcs SHARED ${LIBS})
+else()
+	add_library(funcs STATIC ${LIBS})
+endif()

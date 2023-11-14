@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.22)
+project(educafe08-libs LANGUAGES C)
+include_directories(${CMAKE_SOURCE_DIR}/headers)
+add_executable(a.out ${CMAKE_CURRENT_LIST_DIR}/main.c)
+target_link_libraries(a.out funcs)
