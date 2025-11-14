@@ -1,10 +1,10 @@
 #include<stdio.h>
+#include <unistd.h>
 	
 void func1();
 void func2();
 	
-// #pragma startup func1
-// #pragma exit func2
+// #pragma startup func1, #pragma exit func2
 void __attribute__((constructor)) func1(); 
 void __attribute__((destructor)) func2();
 	
@@ -19,6 +19,7 @@ void func2(){
 int main(){
 	printf("main() excuted\n");
 	return 0;
+    // _exit(0);
 }
 
 

@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-#pragma GCC dependency "04-1.pragma.c"
+#pragma GCC dependency "05-1.pragma.c"
 
 int main(){
 	return 0;

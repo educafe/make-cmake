@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#define BEGIN printf("Program started\n")
-#define END printf("Program ended\n")
+#define BEGIN printf("Program starts\n")
+#define END printf("Program ends\n")
 #define MILESTONE(parameter) printf("MILESTONE = %s\n", parameter)
 int main() {
     BEGIN;
