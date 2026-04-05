@@ -1,5 +1,5 @@
 ## \ch02.make\02.rules\03-1.oneshell.Makefile
-.ONESHELL: file02
+.ONESHELL:
 # .SHELLFLAGS += -e
 a.out : 
 	tar -cf a.out dir01/file01 dir01/file02

@@ -1,14 +1,25 @@
 #include <stdio.h>
 
-#define LINUX 0
+#define LINUX   1
+#define MAC     2
 
-int main() {
-#ifdef LINUX
-    printf("Linux version\n");
-#elif defined(MAC)
-    printf("MAC version\n");
+#ifndef OS
+#error "Please define OS (e.g., -DOS=LINUX)"
+#endif
+
+#if (OS == LINUX)
+    #pragma message ("Linux version build")
+#elif (OS == MAC)
+    #error "MAC version not supported"
 #else
-    printf("WINDOWS version\n");
+    #error "Unknown OS"
+#endif
+
+int main(void) {
+#if (OS == LINUX)
+    printf("Linux version\n");
+#elif (OS == MAC)
+    printf("MAC version\n");
 #endif
     return 0;
 }
